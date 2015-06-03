@@ -39,8 +39,8 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 			$scope.productResults = new Array();
 		
 		
-		var url = 'http://www.get-gt.appspot.com/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
-//		var url = '/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
+//		var url = 'http://www.get-gt.appspot.com/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
+		var url = '/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
 		console.log('SEARCH: '+url);
 		
 		var headers = {headers: {'Authorization': $scope.token}};
