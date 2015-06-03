@@ -45,12 +45,13 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		
 		var headers = {headers: {'Authorization': $scope.token}};
         $http.get(url, headers).success(function(data, status, headers, config) {
-            if (data['results'].confirmation != 'success'){
-                alert(data['message']);
+        	var results = data['results'];
+            if (results.confirmation != 'success'){
+                alert(results['message']);
                 return;
             }
 			
-			var list = data['results'].products;
+			var list = results.products;
 			for (var i=0; i<list.length; i++)
 				$scope.productResults.push(list[i]);
 			
