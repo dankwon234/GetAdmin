@@ -3,6 +3,8 @@ var app = angular.module('AccountModule', []);
 app.controller('AccountController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = null;
 	$scope.token = null;
+	$scope.loading = false;
+
 	
 	
 	$scope.init = function(){
@@ -43,6 +45,7 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
 			return;
 		}
 		
+		$scope.loading = true;
 		var json = JSON.stringify($scope.profile);
 		console.log('UPDATE: '+json);
 		
@@ -57,6 +60,7 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
                 return;
             }
             
+            $scope.loading = false;
             alert('Profile Updated');
             $scope.profile = results['profile'];
 			

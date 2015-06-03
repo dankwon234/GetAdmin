@@ -6,6 +6,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = null;
 	$scope.token = null;
 
+
 //This guy, man. AMIRITE?
 	$scope.init = function(){
 		console.log('Search Controller: INIT');

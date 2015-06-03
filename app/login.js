@@ -3,6 +3,8 @@ var app = angular.module('LoginModule', []);
 app.controller('LoginController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = {'email':'', 'password':''};
 	$scope.newUser = {'firstName':'', 'lastName':'', 'email':'', 'password':''};
+	$scope.loading = false;
+
 
 
 	$scope.init = function(){
@@ -36,8 +38,8 @@ app.controller('LoginController', ['$scope', '$http', function($scope, $http){
 			return;
 		}
 
+		$scope.loading = true;
 		var json = JSON.stringify($scope.newUser);
-		
     	var url = '/api/profiles';
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
@@ -45,6 +47,7 @@ app.controller('LoginController', ['$scope', '$http', function($scope, $http){
             
             if (results['confirmation'] != 'success'){
                 alert(results['message']);
+                $scope.loading = false;
                 return;
             }
             
@@ -67,8 +70,8 @@ app.controller('LoginController', ['$scope', '$http', function($scope, $http){
 			return;
 		}
 		
+		$scope.loading = true;
 		var json = JSON.stringify($scope.profile);
-
 		console.log('Login: '+json);
 		var url = '/api/login';
 
@@ -78,6 +81,7 @@ app.controller('LoginController', ['$scope', '$http', function($scope, $http){
         	
             if (results.confirmation != 'success'){
                 alert(results['message']);
+                $scope.loading = false;
                 return;
             }
 			
