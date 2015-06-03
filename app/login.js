@@ -40,11 +40,11 @@ app.controller('LoginController', ['$scope', '$http', function($scope, $http){
 		
     	var url = '/api/profiles';
         $http.post(url, json).success(function(data, status, headers, config) {
-            var confirmation = data['confirmation'];
-            console.log('CONFIRMATION: '+ confirmation);
+        	var results = data['results'];
+            console.log('CONFIRMATION: '+ results['confirmation']);
             
-            if (confirmation != 'success'){
-                alert(data['message']);
+            if (results['confirmation'] != 'success'){
+                alert(results['message']);
                 return;
             }
             
