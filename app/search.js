@@ -5,6 +5,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	$scope.productResults = new Array();
 	$scope.profile = null;
 	$scope.token = null;
+	$scope.loading = false;
 
 
 //This guy, man. AMIRITE?
@@ -41,6 +42,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		
 		
 //		var url = 'http://www.get-gt.appspot.com/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
+		$scope.loading = true;
 		var url = '/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
 		console.log('SEARCH: '+url);
 		
@@ -51,7 +53,8 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
                 alert(results['message']);
                 return;
             }
-			
+
+			$scope.loading = false;
 			var list = results.products;
 			for (var i=0; i<list.length; i++)
 				$scope.productResults.push(list[i]);

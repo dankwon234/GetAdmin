@@ -16,6 +16,9 @@
 	</head>
 
 	<body ng-app="GetSearch" ng-controller="SearchController" ng-init="init()">
+		<div class="loading-overlay" ng-show="loading">
+	      <div spinner spin="loading"></div>
+	    </div>
 		<div style="width:100%;padding:24px;background:#26a9e0;">
 		<table style="float:right;margin-right:200px;font-size:20px;margin-top:60px">
 		  	<tbody>
