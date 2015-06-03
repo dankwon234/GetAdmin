@@ -2,10 +2,15 @@ var app = angular.module('LoginModule', []);
 
 app.controller('LoginController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = {'email':'', 'password':''};
+	$scope.newUser = {'firstName':'', 'lastName':'', 'email':'', 'password':''};
 
 
 	$scope.init = function(){
 		console.log('Login Controller: INIT');
+	}
+
+	$scope.register = function(){
+		if ($scope.newUser.email.length==0)
 	}
 
 	$scope.login = function(){
