@@ -9,14 +9,17 @@
   		<script src='../admin/app/search.js'></script>
   		<script src='../admin/app/login.js'></script>
   		<script src='../admin/app/account.js'></script>
-  		<script src="/site/js/knob.js"></script>
- 		<script src="/site/js/spin.js"></script> 
+  		<script src="../admin/js/jquery.js"></script> 
+  		<script src="../admin/js/knob.js"></script>
+ 		<script src="../admin/js/spin.js"></script> 
 		
 	</head>
 
 
 	<body ng-app="GetSearch" ng-controller="AccountController" ng-init="init()">
-	<div spinner spin="loading"></div>
+	<div class="loading-overlay" ng-show="loading">
+      <div spinner spin="loading"></div>
+    </div>
 		<div style="width:100%;padding:24px;background:#26a9e0;">
 		<table style="float:right;margin-right:200px;font-size:20px;margin-top:60px">
 		  	<tbody>
