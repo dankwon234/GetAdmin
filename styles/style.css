@@ -1,0 +1,25 @@
+.section {
+	background:#f9f9f9; 
+	width:50%;
+	margin-top:30px;
+	padding:24px;
+}
+
+
+.section h2{
+	margin-top: 0px;
+	color: red;
+}
+
+.section input{
+	width:80%;
+	margin-top:12px;
+	height: 32px;
+	border-radius:3px;
+	border: 1px solid #ddd;
+	padding-left:8px;
+}
+
+.section button{
+	margin-top:12px;
+}

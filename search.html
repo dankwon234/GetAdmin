@@ -1,0 +1,79 @@
+<html>
+	<head>
+		
+		<link rel="stylesheet" href ="/admin/styles/style.css">
+    	<link rel="stylesheet" href="/admin/styles/bootstrap.min.css">
+		
+		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
+  		<script src='/admin/app/app.js'></script>
+  		<script src='/admin/app/search.js'></script>
+  		<script src='/admin/app/login.js'></script>
+  		<script src='/admin/app/account.js'></script>
+		
+	</head>
+
+	<body ng-app="GetSearch" ng-controller="SearchController" ng-init="init()">
+		<div style="width:100%;padding:24px;background:#26a9e0;">
+		  <img align="left" style="margin-right:18px" src="/admin/images/logo-white.png" />
+		  <h1 style= "color:#fff">Get</h1>
+		</div>
+	
+	
+		
+		
+   	 	<div style="padding:24px">
+   	 	  <div class="col-md-8">
+   	   		<input class="form-control" ng-keyup="$event.keyCode == 13 ? search('yes') : null" ng-model= "searchInput" type="text" placeholder = "Search Value" style="width:66%; radius=10px" /> 
+			<!--br /> <br /-->
+			<br /><button class="btn" ng-click="search('yes')" style="color:#069" >Get Search</button>
+   	 	  
+   	 	    <br /><br />
+   	 	    <hr />
+   	 	    <br />
+   	 	    
+            <h2 style="color:#069">Search Results</h2>
+            <ol>
+              <li ng-repeat="result in productResults track by $index">
+				<div style= "width:100%; padding:24px;">
+				  <div style="width:60%">
+					<img align="right" style="max-width:180px;" src="{{ result.images[0] }}?crop=240"/>	
+					<h3>Product Info</h3>		
+					Name: {{ result.name }} <br /> 
+					Brand: {{ result.brand }} <br />
+					Price: ${{ result.price }}
+				  </div>
+					
+					<div>
+						<h3>Offers</h3>
+						
+						<div ng-repeat = "site in result.sitedetails track by $index">
+							<hr style="margin-bottom:4px;margin-top:6px" />
+							<a href="{{site.url}}" target="_blank" ><strong>{{ site.name.toUpperCase() }}</strong></a>
+							<table style="width:100%;font-size:14px;margin-top:4px">
+								<tr ng-repeat = "offer in site.latestoffers track by $index">
+							  		<td style="width:33%">Seller: {{offer.seller}}</td>
+									<td ng-if="offer.isactive == 1" style= "width:33%" >isActive: YES </td>
+									<td ng-if="offer.isactive == 0" style= "width:33%" >isActive: NO </td>
+						   			<td style="width:33%">Price: ${{offer.price}}</td>
+									  		
+						  		</tr>
+							</table>
+							<br /><br />
+						</div>
+					</div>
+					<br />
+				</div>
+				<hr/>
+			</li>
+          </ol>
+		  <button ng-click="search('no')" style="color:#069" >Next 10</button>
+		  <br /><br />
+   	 	  
+   	 	  
+   	 	  </div>
+   	 	
+        </div>
+		
+  	</body>
+	
+</html>
