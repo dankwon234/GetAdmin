@@ -44,7 +44,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		console.log('SEARCH: '+url);
 		
 		var headers = {headers: {'Authorization': $scope.token}};
-        $http.get(headers, url).success(function(data, status, headers, config) {
+        $http.get(url, headers).success(function(data, status, headers, config) {
             if (data['results'].confirmation != 'success'){
                 alert(data['message']);
                 return;
