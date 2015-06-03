@@ -10,7 +10,50 @@ app.controller('LoginController', ['$scope', '$http', function($scope, $http){
 	}
 
 	$scope.register = function(){
-		if ($scope.newUser.email.length==0)
+		if ($scope.newUser.firstName.length==0){
+			alert('Please enter your first name.');
+			return;
+		}
+		
+		if ($scope.newUser.lastName.length==0){
+			alert('Please enter your last name.');
+			return;
+		}
+		
+		if ($scope.newUser.email.length==0){
+			console.log(JSON.stringify($scope.profile));
+			alert('Please enter your email.');
+			return;
+		}
+
+		if ($scope.newUser.email.indexOf('@')==-1){
+			alert('Please enter a valid email.');
+			return;
+		}
+		
+		if ($scope.newUser.password.length==0){
+			alert('Please enter your password.');
+			return;
+		}
+
+		var json = JSON.stringify($scope.newUser);
+		
+    	var url = '/api/profiles';
+        $http.post(url, json).success(function(data, status, headers, config) {
+            var confirmation = data['confirmation'];
+            console.log('CONFIRMATION: '+ confirmation);
+            
+            if (confirmation != 'success'){
+                alert(data['message']);
+                return;
+            }
+            
+            window.location.href = '/admin/account';
+            
+            
+        }).error(function(data, status, headers, config) {
+            console.log("error", data, status, headers, config);
+        });
 	}
 
 	$scope.login = function(){
