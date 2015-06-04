@@ -8,6 +8,16 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.cart = null;
 
 	
+
+	// $scope.init = function(){
+	// 	var requestInfo = parseLocation('admin');
+ //    	console.log(JSON.stringify(requestInfo));
+ //    	if (requestInfo.params.id==null){
+ //        	console.log('CartController: MISSING CART ID');
+ //       		return;
+ //    	}
+
+	// }
 	$scope.init = function(){
 		console.log('Cart Controller: INIT');
 
@@ -27,12 +37,12 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 			var requestInfo = parseLocation('admin');
     		console.log(JSON.stringify(requestInfo));
     	
-    		if (requestInfo.identifier==null){
-        		console.log('ProfileController: MISSING PROFILE ID');
+    		if (requestInfo.params.id==null){
+        		console.log('CartController: MISSING CART ID');
        		 	return;
     		}
     	
-			fetchCart(requestInfo.identifier);		
+			fetchCart(requestInfo.params.id);		
 			
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
