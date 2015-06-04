@@ -61,7 +61,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
                 return;
             }
             
-            $scope.cart = results['carts'];
+            $scope.cart = results['cart'];
             $scope.items = $scope.cart.items;
 			
         }).error(function(data, status, headers, config){
