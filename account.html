@@ -62,16 +62,16 @@
             <table>
             	<thead>
             		<tr>
-            			<td>Cart ID #</td>
-            			<td>Cart Status</td>
-            			<td>View Cart</td>
+            			<td style="padding:20px 40px 20px 0px"><strong>Cart ID #</strong></td>
+            			<td style="padding:20px 40px 20px 0px"><strong>Cart Status</strong></td>
+            			<td style="padding:20px 40px 20px 0px"><strong>View Cart</strong></td>
             		</tr>
             	</thead>
 	            <tbody>
 	            	<tr ng-repeat="cart in carts track by $index">
-	            		<td style="padding:20px 20px 20px 0px">{{ cart.id }}</td>
-	            		<td style="padding:20px 20px 20px 0px">{{ cart.status }}</td>
-	            		<td style="padding:20px 20px 20px 0px"><a href="/admin/mycarts/{{ cart.id }}">View</a></td>
+	            		<td style="padding:20px 40px 20px 0px">{{ cart.id }}</td>
+	            		<td style="padding:20px 40px 20px 0px">{{ cart.status }}</td>
+	            		<td style="padding:20px 40px 20px 0px"><a href="/admin/mycarts/{{ cart.id }}">View</a></td>
 	            	</tr>
 	            </tbody>
             </table>
