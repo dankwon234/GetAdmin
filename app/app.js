@@ -1,4 +1,4 @@
-var app = angular.module('GetSearch', ['SearchModule', 'LoginModule', 'AccountModule']);
+var app = angular.module('GetSearch', ['SearchModule', 'LoginModule', 'AccountModule', 'CartModule']);
 
 app.directive('spinner', function() {
     return {
