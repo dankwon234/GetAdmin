@@ -23,12 +23,19 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
             
             $scope.profile = results['profile'];
             $scope.token = results['token'];
+
+            fetchCarts();
 			
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
 
-        var url = '/api/mycarts';
+     
+
+	}
+	
+	function fetchCarts(){
+		var url = '/api/mycarts';
         var headers = {headers: {'Authorization': $scope.token}};
         $http.get(url, headers).success(function(data, status, headers, config) {
         	var results = data['results'];
@@ -44,9 +51,7 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
-
 	}
-	
 	
 	$scope.update = function(){
 		var required = ['firstName', 'lastName', 'email', 'address', 'city', 'state'];

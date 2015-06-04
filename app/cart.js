@@ -1,15 +1,15 @@
-var app = angular.module('AccountModule', []);
+var app = angular.module('CartModule', []);
 
-app.controller('AccountController', ['$scope', '$http', function($scope, $http){
+app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = null;
 	$scope.token = null;
 	$scope.loading = false;
-	$scope.carts = null;
+	$scope.cart = null;
 
 	
 	
 	$scope.init = function(){
-		console.log('Account Controller: INIT');
+		console.log('Cart Controller: INIT');
 		
 		var url = '/api/account';
         $http.get(url).success(function(data, status, headers, config) {
@@ -23,12 +23,19 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
             
             $scope.profile = results['profile'];
             $scope.token = results['token'];
+
+            fetchCart();
 			
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
 
-        var url = '/api/mycarts';
+     
+
+	}
+	
+	function fetchCart(){
+		var url = '/api/mycarts';
         var headers = {headers: {'Authorization': $scope.token}};
         $http.get(url, headers).success(function(data, status, headers, config) {
         	var results = data['results'];
@@ -39,12 +46,11 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
                 return;
             }
             
-            $scope.carts = results['carts'];
+            $scope.cart = results['carts'];
 			
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
-
 	}
 	
 	
