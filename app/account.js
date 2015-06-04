@@ -4,6 +4,7 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = null;
 	$scope.token = null;
 	$scope.loading = false;
+	$scope.carts = null;
 
 	
 	
@@ -26,6 +27,24 @@ app.controller('AccountController', ['$scope', '$http', function($scope, $http){
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
+
+        var url = '/api/mycarts';
+        var headers = {headers: {'Authorization': $scope.token}};
+        $http.get(url, headers).success(function(data, status, headers, config) {
+        	var results = data['results'];
+        	console.log(JSON.stringify(results));
+        	
+            if (results.confirmation != 'success'){
+                alert(results['message']);
+                return;
+            }
+            
+            $scope.carts = results['carts'];
+			
+        }).error(function(data, status, headers, config){
+            console.log("error", data, status, headers, config);
+        });
+
 	}
 	
 	

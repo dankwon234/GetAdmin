@@ -36,10 +36,10 @@
 		
 		
    	 	<div style="padding:24px">
-   	 	  <div class="col-md-8">
+   	 	  <div class="col-md-6">
             <h2 style="color:#069">Account</h2>
             
-            <div style="width:50%">
+            <div style="width:60%">
               <input ng-model="profile.firstName" class="form-control" placeholder="First Name" type="text" /><br />
               <input ng-model="profile.lastName" class="form-control" placeholder="Last Name" type="text" /><br />
               <input ng-model="profile.email" class="form-control" placeholder="Email" type="text" /><br />
@@ -50,6 +50,20 @@
 
 		      <button class="btn" ng-click="update()" style="color:#069" >Update Account</button>
             </div>
+		    <br /><br />
+   	 	  
+   	 	  
+   	 	  </div>
+   	 	
+   	 	<div class="col-md-6">
+            <h2 style="color:#069">Carts</h2>
+            
+            <table>
+            	<tr ng-repeat="cart in carts track by $index">
+            		<td style="padding:20px 20px 20px 0px">{{ cart.id }}</td>
+            		<td style="padding:20px 20px 20px 0px">{{ cart.status }}</td>
+            	</tr>
+            </table>
 		    <br /><br />
    	 	  
    	 	  
