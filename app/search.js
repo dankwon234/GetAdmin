@@ -8,7 +8,6 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	$scope.loading = false;
 
 
-//This guy, man. AMIRITE?
 	$scope.init = function(){
 		console.log('Search Controller: INIT');
 		var url = '/api/account';

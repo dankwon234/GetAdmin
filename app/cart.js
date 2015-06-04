@@ -4,6 +4,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = null;
 	$scope.token = null;
 	$scope.loading = false;
+	$scope.items = new Array();
 	$scope.cart = null;
 
 	
@@ -31,7 +32,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 	
 	function fetchCart(){
-		var url = '/api/mycarts';
+		var cartId = request.getResourceIdentifier();
+		var url = '/api/carts/'+cartId;
         var headers = {headers: {'Authorization': $scope.token}};
         $http.get(url, headers).success(function(data, status, headers, config) {
         	var results = data['results'];
@@ -43,14 +45,19 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
             }
             
             $scope.cart = results['carts'];
+            $scope.items = $scope.cart.items;
 			
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
 	}
+
+	$scope.checkout = function(){
+		return;
+	}
 	
 
 
 
-	
+
 }]);
