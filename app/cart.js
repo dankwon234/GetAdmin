@@ -50,7 +50,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 	
 	function fetchCart(cartId){
-		var url = '/api/carts/'+cardId;
+		var url = '/api/carts/'+cartId;
         var headers = {headers: {'Authorization': $scope.token}};
         $http.get(url, headers).success(function(data, status, headers, config) {
         	var results = data['results'];
