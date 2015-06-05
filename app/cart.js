@@ -5,7 +5,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.token = null;
 	$scope.loading = false;
 	$scope.cart = null;
-	$scope.products = {'products':[]};
+	$scope.products = new Array();
 
 	$scope.init = function(){
 		// console.log('Cart Controller: INIT');
@@ -65,12 +65,18 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 
 	$scope.registerCart = function(){
-		var url = 'http://57.get-gt.appspot.com/twotap/cart/';
-		$scope.products.products.push('http://www.walmart.com/ip/37603926');
-		var json = JSON.stringify($scope.products);
+//		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
+//		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
+		$scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
+		
+		
+		var json = JSON.stringify({'products':$scope.products});
 		console.log(json);
+		
 		//array called products in json, each item in array is the URL
 		// hard code products array. will be 1 item array
+		var url = 'http://57.get-gt.appspot.com/twotap/cart';
+//		var url = '/twotap/cart/';
         $http.post(url, json).success(function(data, status, headers, config) {
 
         	var results = data['results'];
