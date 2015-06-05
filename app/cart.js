@@ -4,20 +4,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.profile = null;
 	$scope.token = null;
 	$scope.loading = false;
-	$scope.items = new Array();
 	$scope.cart = null;
 
-	
-
-	// $scope.init = function(){
-	// 	var requestInfo = parseLocation('admin');
- //    	console.log(JSON.stringify(requestInfo));
- //    	if (requestInfo.params.id==null){
- //        	console.log('CartController: MISSING CART ID');
- //       		return;
- //    	}
-
-	// }
 	$scope.init = function(){
 		console.log('Cart Controller: INIT');
 
@@ -62,7 +50,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
             }
             
             $scope.cart = results['cart'];
-            $scope.items = $scope.cart.items;
 			
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);

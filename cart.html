@@ -37,43 +37,26 @@
 		
    	 	<div style="padding:24px">
    	 	  <div class="col-md-6">
-            <h2 style="color:#069">Cart - {{ card.id }}</h2>
+            <h2 style="color:#069">Cart - {{ cart.id }}</h2>
+            <h4>Status: {{ cart.status }}</h4>
             <h6>{{ cart.timestamp }}</h6>
             <br/>
             <div>
               <ol>
-              <li ng-repeat="item in items track by $index">
+              <li ng-repeat="item in cart.items track by $index">
                 <div style= "width:100%; padding:24px;">
                  <div style="width:60%">
-                  <img align="right" style="max-width:180px;" src="{{ result.images[0] }}?crop=240"/> 
+                  <img align="right" style="max-width:180px;" src="{{ item.image }}?crop=240"/> 
                   <h3>Product Info</h3>   
-                  Name: {{ result.name }} <br /> 
-                  Brand: {{ result.brand }} <br />
-                  Price: ${{ result.price }}
+                  Name: {{ item.name }} <br /> 
+                  ID: {{ item.id }} <br /> 
+                  Price: ${{ item.price }}
                  </div>
-                <div>
-                <h3>Offers</h3>
-                  <div ng-repeat = "site in item.sitedetails track by $index">
-                    <hr style="margin-bottom:4px;margin-top:6px" />
-                    <a href="{{site.url}}" target="_blank" ><strong>{{ site.name.toUpperCase() }}</strong></a>
-                    <table style="width:100%;font-size:14px;margin-top:4px">
-                      <tr ng-repeat = "offer in site.latestoffers track by $index">
-                          <td style="width:33%">Seller: {{offer.seller}}</td>
-                        <td ng-if="offer.isactive == 1" style= "width:33%" >isActive: YES </td>
-                        <td ng-if="offer.isactive == 0" style= "width:33%" >isActive: NO </td>
-                          <td style="width:33%">Price: ${{offer.price}}</td>
-                        </tr>
-                    </table>
-                    <br /><br />
-                  </div>
-                </div>
-                <br />
               </div>
               <hr/>
             </li>
           </ol>
             </div>
-            <h4>{{ cart.status }}</h4>
             <h4>Total: {{ cart.total }}</h4>
             <div style="width:60%">
 		          <button class="btn" ng-click="checkout()" style="color:#069" >Checkout</button>
