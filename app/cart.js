@@ -82,7 +82,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
         	var results = data['results'];
         	console.log(JSON.stringify(results));
-        	$scope.twoTapCartId = results.twoTapResponse.card_id;
+        	$scope.twoTapCartId = results.twoTapResponse.cart_id;
         	
             // if (results.confirmation != 'success'){
             //     alert(results['message']);
@@ -102,9 +102,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		}
 		var url = 'http://57.get-gt.appspot.com/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
-        	var results = data['results'];
-        	console.log(JSON.stringify(results));
-        	var message = results.message;
+        	var results = data;        	
+        	var message = results['message'];
         	alert(message);
             
 
