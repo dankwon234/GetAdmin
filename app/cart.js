@@ -96,6 +96,10 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 
 	$scope.getStatus = function(){
+		if ($scope.twoTapCardId==null){
+			alert('First Register Your Cart by Clicking Step 1');
+			return;
+		}
 		var url = 'http://57.get-gt.appspot.com/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
         	var results = data['results'];
