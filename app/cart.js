@@ -5,6 +5,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.token = null;
 	$scope.loading = false;
 	$scope.cart = null;
+	$scope.twoTapCartId = null;
 	$scope.products = new Array();
 
 	$scope.init = function(){
@@ -65,9 +66,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 
 	$scope.registerCart = function(){
-//		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
+		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
 //		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
-		$scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
+		// $scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
 		
 		
 		var json = JSON.stringify({'products':$scope.products});
@@ -81,11 +82,26 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
         	var results = data['results'];
         	console.log(JSON.stringify(results));
+        	$scope.twoTapCartId = results.twoTapResponse.card_id;
         	
             // if (results.confirmation != 'success'){
             //     alert(results['message']);
             //     return;
             // }
+            
+
+        }).error(function(data, status, headers, config){
+            console.log("error", data, status, headers, config);
+        });
+	}
+
+	$scope.getStatus = function(){
+		var url = 'http://57.get-gt.appspot.com/twotap/status?cart='+$scope.twoTapCartId;
+		$http.get(url).success(function(data, status, headers, config) {
+        	var results = data['results'];
+        	console.log(JSON.stringify(results));
+        	var message = results.message;
+        	alert(message);
             
 
         }).error(function(data, status, headers, config){
