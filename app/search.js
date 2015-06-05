@@ -8,7 +8,6 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	$scope.loading = false;
 
 
-//This guy, man. AMIRITE?
 	$scope.init = function(){
 		console.log('Search Controller: INIT');
 		var url = '/api/account';
@@ -40,8 +39,6 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		if (isInitial=='yes')
 			$scope.productResults = new Array();
 		
-		
-//		var url = 'http://www.get-gt.appspot.com/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
 		$scope.loading = true;
 		var url = '/api/search?query='+ $scope.searchInput + '&offset=' +$scope.productResults.length;
 		console.log('SEARCH: '+url);
