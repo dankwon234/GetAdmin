@@ -96,7 +96,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 
 	$scope.getStatus = function(){
-		if ($scope.twoTapCardId==null){
+		if ($scope.twoTapCartId==null){
 			alert('First Register Your Cart by Clicking Step 1');
 			return;
 		}
