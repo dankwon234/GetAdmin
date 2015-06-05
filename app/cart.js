@@ -6,6 +6,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.loading = false;
 	$scope.cart = null;
 	$scope.twoTapCartId = null;
+	$scope.twoTapCartData = null;
 	$scope.products = new Array();
 
 	$scope.init = function(){
@@ -104,6 +105,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		$http.get(url).success(function(data, status, headers, config) {
         	var results = data;        	
         	var message = results['message'];
+        	if (message!='still_processing')
+        		$scope.twoTapCartData = data;
+        	console.log(JSON.stringify(data));
         	alert(message);
             
 
