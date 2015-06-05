@@ -5,11 +5,45 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.token = null;
 	$scope.loading = false;
 	$scope.cart = null;
+	$scope.products = {'products':[]};
 
 	$scope.init = function(){
-		console.log('Cart Controller: INIT');
+		// console.log('Cart Controller: INIT');
 
-		var url = '/api/account';
+		// var url = 'http://57.get-gt.appspot.com/api/account';
+  //       $http.get(url).success(function(data, status, headers, config) {
+  //       	var results = data['results'];
+  //       	console.log(JSON.stringify(results));
+        	
+  //           if (results.confirmation != 'success'){
+  //               alert(results['message']);
+  //               return;
+  //           }
+            
+  //           $scope.profile = results['profile'];
+  //           $scope.token = results['token'];
+
+		// 	var requestInfo = parseLocation('admin');
+  //   		console.log(JSON.stringify(requestInfo));
+    	
+  //   		if (requestInfo.params.id==null){
+  //       		console.log('CartController: MISSING CART ID');
+  //      		 	return;
+  //   		}
+    	
+		// 	fetchCart(requestInfo.params.id);
+
+  //       }).error(function(data, status, headers, config){
+  //           console.log("error", data, status, headers, config);
+  //       });
+			fetchCart('161afaa7');		
+
+	}
+	
+	function fetchCart(cartId){
+		var url = 'http://57.get-gt.appspot.com/api/carts/'+cartId;
+        //var headers = {headers: {'Authorization': $scope.token}};
+        // $http.get(url, headers).success(function(data, status, headers, config) {
         $http.get(url).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(results));
@@ -19,38 +53,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
                 return;
             }
             
-            $scope.profile = results['profile'];
-            $scope.token = results['token'];
-
-			var requestInfo = parseLocation('admin');
-    		console.log(JSON.stringify(requestInfo));
-    	
-    		if (requestInfo.params.id==null){
-        		console.log('CartController: MISSING CART ID');
-       		 	return;
-    		}
-    	
-			fetchCart(requestInfo.params.id);		
-			
-        }).error(function(data, status, headers, config){
-            console.log("error", data, status, headers, config);
-        });
-	}
-	
-	function fetchCart(cartId){
-		var url = '/api/carts/'+cartId;
-        var headers = {headers: {'Authorization': $scope.token}};
-        $http.get(url, headers).success(function(data, status, headers, config) {
-        	var results = data['results'];
-        	console.log(JSON.stringify(results));
-        	
-            if (results.confirmation != 'success'){
-                alert(results['message']);
-                return;
-            }
-            
             $scope.cart = results['cart'];
-			
+
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
@@ -58,6 +62,29 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 	$scope.checkout = function(){
 		return;
+	}
+
+	$scope.registerCart = function(){
+		var url = 'http://57.get-gt.appspot.com/twotap/cart/';
+		$scope.products.products.push('http://www.walmart.com/ip/37603926');
+		var json = JSON.stringify($scope.products);
+		console.log(json);
+		//array called products in json, each item in array is the URL
+		// hard code products array. will be 1 item array
+        $http.post(url, json).success(function(data, status, headers, config) {
+
+        	var results = data['results'];
+        	console.log(JSON.stringify(results));
+        	
+            // if (results.confirmation != 'success'){
+            //     alert(results['message']);
+            //     return;
+            // }
+            
+
+        }).error(function(data, status, headers, config){
+            console.log("error", data, status, headers, config);
+        });
 	}
 	
 	function parseLocation(stem){
