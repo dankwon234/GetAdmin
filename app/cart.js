@@ -125,7 +125,32 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		}
 		
 		// prepare package with necessary info to send to backend for estimates:
-		var pkg = {'cart':$scope.twoTapCartData.cart_id};
+		var pkg = {'cart_id':$scope.twoTapCartData.cart_id};
+		
+		
+		var sites = $scope.twoTapCartData['sites'];
+		var keys = Object.keys(sites); // this gives back and array
+		// console.log(JSON.stringify(keys));
+		
+		var fields_input = {};
+		for (var i=0; i<keys.length; i++){
+			var key = keys[i]; // each key is a 'site ID'
+			fields_input[key] = {'addToCart':''};
+			// console.log("FIELDS INPUT: "+ JSON.stringify(fields_input));
+			var s = sites[key];
+			var addToCart = s['add_to_cart'];
+			var productId = Object.keys(addToCart).toString();
+			// console.log("PRODUCT ID: " + productId);
+			var requiredFields = {};
+			var productMD5 = {};
+			productMD5[productId] = requiredFields;
+			// console.log("PRODUCTMD5: "+JSON.stringify(productMD5));
+			fields_input[key].addToCart = productMD5;
+			// console.log("FIELDS INPUT: "+ JSON.stringify(fields_input));
+			pkg['fields_input'] = fields_input;
+		}
+
+
 		var shipping = {};
 		shipping['shipping_country'] = 'United States of America';
 		shipping['shipping_state'] = 'New York';
@@ -135,24 +160,10 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		shipping['shipping_zip'] = '10007';
 		shipping['shipping_last_name'] = 'Kelleher';
 		shipping['shipping_telephone'] = '16469440155';
-		pkg['shipping'] = shipping;
-		
-		var sites = $scope.twoTapCartData['sites'];
-		var keys = Object.keys(sites); // this gives back and array
-		console.log(JSON.stringify(keys));
-		
-		for (var i=0; i<keys.length; i++){
-			var key = keys[i]; // each key is a 'site ID'
-			var s = sites[key];
-			var addToCart = s['add_to_cart'];
-			
-			// extract productId hash, then pass it off as a key to an empty json object
-			
-		}
+		pkg['noauthCheckout'] = shipping;
 		
 		
-		
-//		console.log('Estimate Tax And Shipping: '+JSON.stringify(pkg));
+		console.log('Estimate Tax And Shipping: '+JSON.stringify(pkg));
 
 		
 	}
