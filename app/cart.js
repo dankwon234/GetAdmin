@@ -80,7 +80,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		var url = 'http://57.get-gt.appspot.com/twotap/cart';
 //		var url = '/twotap/cart/';
         $http.post(url, json).success(function(data, status, headers, config) {
-
         	var results = data['results'];
         	console.log(JSON.stringify(results));
         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
@@ -90,7 +89,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
             //     return;
             // }
             
-
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
@@ -162,7 +160,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 		var url = '/twotap/estimates';
         $http.post(url, json).success(function(data, status, headers, config) {
-
         	var results = data['results'];
         	console.log(JSON.stringify(data));
         	
@@ -170,14 +167,14 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
                  alert(results['message']);
                  return;
             }
-            
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
-
-		
 	}
+	
+	
+	
 	
 	function parseLocation(stem){
     	console.log('PARSE LOCATION: '+stem);
