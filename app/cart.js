@@ -98,22 +98,64 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 	$scope.getStatus = function(){
 		if ($scope.twoTapCartId==null){
-			alert('First Register Your Cart by Clicking Step 1');
-			return;
+//			alert('First Register Your Cart by Clicking Step 1');
+//			return;
+			
+			$scope.twoTapCartId = '5572852c41d0cc994d23e237';
 		}
+		
 		var url = 'http://57.get-gt.appspot.com/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
-        	var results = data;        	
-        	var message = results['message'];
-        	if (message!='still_processing')
+        	var message = data['message'];
+        	if (message != 'still_processing')
         		$scope.twoTapCartData = data;
+        	
         	console.log(JSON.stringify(data));
         	alert(message);
-            
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
+	}
+	
+	$scope.estimateTaxAndShipping = function(){
+		if ($scope.twoTapCartData == null){
+			// can't continue
+			return;
+		}
+		
+		// prepare package with necessary info to send to backend for estimates:
+		var pkg = {'cart':$scope.twoTapCartData.cart_id};
+		var shipping = {};
+		shipping['shipping_country'] = 'United States of America';
+		shipping['shipping_state'] = 'New York';
+		shipping['shipping_first_name'] = 'Alex';
+		shipping['shipping_city'] = 'new york';
+		shipping['shipping_address'] = '53 Park Place';
+		shipping['shipping_zip'] = '10007';
+		shipping['shipping_last_name'] = 'Kelleher';
+		shipping['shipping_telephone'] = '16469440155';
+		pkg['shipping'] = shipping;
+		
+		var sites = $scope.twoTapCartData['sites'];
+		var keys = Object.keys(sites);
+		console.log(JSON.stringify(keys));
+		
+		for (var i=0; i<keys.length; i++){
+			var key = keys[i]; // each key is a 'site ID'
+			var s = sites[key];
+			var addToCart = s['add_to_cart'];
+			
+			
+//			var site = {};
+//			pkg[key] = site;
+		}
+		
+		
+		
+//		console.log('Estimate Tax And Shipping: '+JSON.stringify(pkg));
+
+		
 	}
 	
 	function parseLocation(stem){
