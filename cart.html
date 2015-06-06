@@ -2,17 +2,17 @@
 	<head>
 		
 		<link rel="stylesheet" href ="../admin/styles/style.css">
-    <link rel="stylesheet" href="../admin/styles/bootstrap.min.css">
+    	<link rel="stylesheet" href="../admin/styles/bootstrap.min.css">
 		
 		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
   		<script src='../admin/app/app.js'></script>
   		<script src='../admin/app/search.js'></script>
   		<script src='../admin/app/login.js'></script>
   		<script src='../admin/app/account.js'></script>
-      <script src='../admin/app/cart.js'></script>
+      	<script src='../admin/app/cart.js'></script>
   		<script src="../admin/js/jquery.js"></script> 
   		<script src="../admin/js/knob.js"></script>
- 		  <script src="../admin/js/spin.js"></script> 
+ 		<script src="../admin/js/spin.js"></script> 
 		
 	</head>
 
@@ -59,9 +59,10 @@
             </div>
             <h4>Total: {{ cart.total }}</h4>
             <div style="width:80%">
-		      <button class="btn" ng-click="registerCart()" style="color:#069" >Register Cart</button>
-              <button class="btn" ng-click="getStatus()" style="color:#069" >Get Status</button>
-              <button class="btn" ng-click="estimateTaxAndShipping()" style="color:#069" >Estimate Tax &amp; Shipping</button>
+		      <button class="btn" ng-click="registerCart()" style="color:#069" >Register Cart</button><br /><br />
+              <button class="btn" ng-click="getStatus()" style="color:#069" >Get Status</button><br /><br />
+              <button class="btn" ng-click="estimateTaxAndShipping()" style="color:#069" >Estimate Tax &amp; Shipping</button><br /><br />
+              <button class="btn" ng-click="purchase()" style="color:#069" >Purchase</button>
             </div>
 		        <br /><br />
    	 	  </div>

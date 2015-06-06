@@ -65,10 +65,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
             console.log("error", data, status, headers, config);
         });
 	}
-
-	$scope.checkout = function(){
-		return;
-	}
+	
 
 	$scope.registerCart = function(){
 		$scope.products.push('http://www.abercrombie.com/shop/us/mens-socks-underwear-and-socks/a-and-f-casual-socks-4436081_01'); // batteries
@@ -180,7 +177,18 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 	
 	
+	$scope.purchase = function(){
+		console.log('PURCHASE');
+		return;
+	}
+
+
 	
+	$scope.checkout = function(){
+		return;
+	}
+
+
 	
 	function parseLocation(stem){
     	console.log('PARSE LOCATION: '+stem);
