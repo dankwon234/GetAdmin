@@ -146,9 +146,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 			var s = sites[key];
 			var addToCart = s['add_to_cart'];
 			
+			// extract productId hash, then pass it off as a key to an empty json object
 			
-//			var site = {};
-//			pkg[key] = site;
 		}
 		
 		
