@@ -138,7 +138,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		pkg['shipping'] = shipping;
 		
 		var sites = $scope.twoTapCartData['sites'];
-		var keys = Object.keys(sites);
+		var keys = Object.keys(sites); // this gives back and array
 		console.log(JSON.stringify(keys));
 		
 		for (var i=0; i<keys.length; i++){
