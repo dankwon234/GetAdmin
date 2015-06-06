@@ -5,10 +5,14 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.token = null;
 	$scope.loading = false;
 	$scope.cart = null;
+	
+	// TWO TAP STUFF:
 	$scope.twoTapCartId = null;
 	$scope.twoTapCartData = null;
 	$scope.products = new Array();
+	$scope.checkoutInfo = null;
 
+	
 	$scope.init = function(){
 		// console.log('Cart Controller: INIT');
 
@@ -67,7 +71,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 
 	$scope.registerCart = function(){
-		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
+		$scope.products.push('http://www.abercrombie.com/shop/us/mens-socks-underwear-and-socks/a-and-f-casual-socks-4436081_01'); // batteries
+//		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
 //		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
 		// $scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
 		
@@ -123,7 +128,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		}
 		
 		// prepare package with necessary info to send to backend for estimates:
-		var pkg = {'cart_id':$scope.twoTapCartData.cart_id};
+		$scope.checkoutInfo = {'cart_id':$scope.twoTapCartData.cart_id};
 		
 		
 		var sites = $scope.twoTapCartData['sites'];
@@ -148,14 +153,15 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 			var addToCart = s['add_to_cart'];
 			var productId = Object.keys(addToCart).toString();
 			var requiredFields = {};
-			var productMD5 = {};
-			productMD5[productId] = requiredFields;
-			fields_input[key].addToCart = productMD5;
+			fields_input[key].addToCart = { productId:requiredFields };
 			fields_input[key].noauthCheckout = shipping;
-			pkg['fields_input'] = fields_input;
-		}		
+//			pkg['fields_input'] = fields_input;
+		}
 		
-		var json = JSON.stringify(pkg);
+		$scope.checkoutInfo['fields_input'] = fields_input;
+
+		
+		var json = JSON.stringify($scope.checkoutInfo);
 		console.log('Estimate Tax And Shipping: '+json);
 
 		var url = '/twotap/estimates';
