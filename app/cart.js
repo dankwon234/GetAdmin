@@ -157,7 +157,24 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 			pkg['fields_input'] = fields_input;
 		}		
 		
-		console.log('Estimate Tax And Shipping: '+JSON.stringify(pkg));
+		var json = JSON.stringify(pkg);
+		console.log('Estimate Tax And Shipping: '+json);
+
+		var url = '/twotap/estimates';
+        $http.post(url, json).success(function(data, status, headers, config) {
+
+        	var results = data['results'];
+        	console.log(JSON.stringify(data));
+        	
+            if (results.confirmation != 'success'){
+                 alert(results['message']);
+                 return;
+            }
+            
+
+        }).error(function(data, status, headers, config){
+            console.log("error", data, status, headers, config);
+        });
 
 		
 	}
