@@ -58,6 +58,7 @@
           </ol>
             </div>
             <h4>Total: {{ cart.total }}</h4>
+            <h4 ng-if="finalPrice!=null">Final Price: {{ finalPrice }}  Sales Tax: {{ salesTax }}  Shipping Price: {{ shippingPrice }}</h4>
             <div style="width:80%">
 		      <button class="btn" ng-click="registerCart()" style="color:#069" >Register Cart</button>
               <button class="btn" ng-click="getStatus()" style="color:#069" >Get Status</button>

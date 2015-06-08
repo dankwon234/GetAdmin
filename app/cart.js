@@ -11,6 +11,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.twoTapCartData = null;
 	$scope.products = new Array();
 	$scope.checkoutInfo = null;
+	$scope.finalPrice = null;
+	$scope.salesTax = null;
+	$scope.shippingPrice = null;
 
 	
 	$scope.init = function(){
@@ -168,6 +171,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(data));
+        	$scope.finalPrice = results.twoTapResponse.estimates[key].prices.final_price;
+			$scope.salesTax = results.twoTapResponse.estimates[key].prices.sales_tax;
+			$scope.shippingPrice = results.twoTapResponse.estimates[key].prices.shipping_price;
         	
             if (results.confirmation != 'success'){
                  alert(results['message']);
