@@ -44,7 +44,8 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	            }
 	            
 	            $scope.cart = results['carts'][0];
-	            console.log(JSON.stringify('CART: '+$scope.cart));
+	            console.log(JSON.stringify($scope.cart));
+	            console.log(JSON.strinfify(results['carts']));
 				
 	        }).error(function(data, status, headers, config){
 	            console.log("error", data, status, headers, config);
