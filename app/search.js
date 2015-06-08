@@ -44,13 +44,15 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	            }
 	            
 	            $scope.cart = results['carts'][0];
-	            console.log(JSON.stringify($scope.cart));
-	            console.log(JSON.strinfify(results['carts']));
 				
 	        }).error(function(data, status, headers, config){
 	            console.log("error", data, status, headers, config);
 	        });
 		}
+
+	$scope.addToCart = function(var item){
+		console.log(item);
+	}
 
 	$scope.search = function(isInitial){
         if ($scope.searchInput == ''){
