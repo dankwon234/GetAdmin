@@ -92,7 +92,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 //         	console.log(JSON.stringify(results));
 //         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
         	$scope.loading = true;
-        	var status = setInterval($scope.getStatus(), 1000);
+        	var status = setInterval($scope.getStatus(), 5000);
         	
             // if (results.confirmation != 'success'){
             //     alert(results['message']);
@@ -190,7 +190,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         });
 	}
 	
-	
+	$scope.purchase = function(){
+		return;
+	}
 	
 	
 	function parseLocation(stem){
