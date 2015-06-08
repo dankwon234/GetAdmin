@@ -161,7 +161,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		var json = JSON.stringify($scope.checkoutInfo);
 		console.log('Estimate Tax And Shipping: '+json);
 
-		var url = '/twotap/estimates';
+		var url = 'http://57.get-gt.appspot.com/twotap/estimates';
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(data));
