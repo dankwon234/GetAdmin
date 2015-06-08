@@ -50,8 +50,9 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	        });
 		}
 
-	$scope.addToCart = function(item){
-		console.log(item);
+	$scope.addToCart = function(item, site){
+		console.log(JSON.stringify(item));
+		console.log(JSON.stringify(site));
 	}
 
 	$scope.search = function(isInitial){
