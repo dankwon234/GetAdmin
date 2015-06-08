@@ -50,7 +50,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 	
 	function fetchCart(cartId){
-		var url = 'http://57.get-gt.appspot.com/api/carts/'+cartId;
+		var url = '/api/carts/'+cartId;
         //var headers = {headers: {'Authorization': $scope.token}};
         // $http.get(url, headers).success(function(data, status, headers, config) {
         $http.get(url).success(function(data, status, headers, config) {
@@ -109,7 +109,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 			$scope.twoTapCartId = '5572852c41d0cc994d23e237';
 		}
 		
-		var url = 'http://57.get-gt.appspot.com/twotap/status?cart='+$scope.twoTapCartId;
+		var url = '/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
         	var message = data['message'];
         	if (message != 'still_processing')
@@ -167,7 +167,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		var json = JSON.stringify($scope.checkoutInfo);
 		console.log('Estimate Tax And Shipping: '+json);
 
-		var url = 'http://57.get-gt.appspot.com/twotap/estimates';
+		var url = '/twotap/estimates';
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(data));
