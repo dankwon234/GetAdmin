@@ -57,12 +57,33 @@
             </li>
           </ol>
             </div>
-            <h4>Total: {{ cart.total }}</h4>
+            <table>
+              <tbody>
+                <tr>
+                  <td style="padding:5px">Total: </td>
+                  <td>&nbsp&nbsp&nbsp&nbsp</td>
+                  <td><span style="color:#069">${{ cart.total }}</span></td>
+                </tr>
+                <tr ng-if="finalPrice!=null">
+                  <td style="padding:5px">+ Sales Tax: </td>
+                  <td>&nbsp&nbsp&nbsp&nbsp</td>
+                  <td><span style="color:#069">{{ salesTax }}</span></td>
+                </tr>
+                <tr ng-if="finalPrice!=null">
+                  <td style="padding:5px">+ Shipping Price: </td>
+                  <td>&nbsp&nbsp&nbsp&nbsp</td>
+                  <td><span style="color:#069">{{ shippingPrice }}</span></td>
+                </tr>
+                <tr ng-if="finalPrice!=null">
+                  <td style="padding:5px">= <strong>Final Price:</strong> </td>
+                  <td>&nbsp&nbsp&nbsp&nbsp</td>
+                  <td><strong><span style="color:#069">{{ finalPrice }}</span></strong></td>
+                </tr>
+              </tbody>
+            </table>
             <div style="width:80%">
-		      <button class="btn" ng-click="registerCart()" style="color:#069" >Register Cart</button><br /><br />
-              <button class="btn" ng-click="getStatus()" style="color:#069" >Get Status</button><br /><br />
-              <button class="btn" ng-click="estimateTaxAndShipping()" style="color:#069" >Estimate Tax &amp; Shipping</button><br /><br />
-              <button class="btn" ng-click="purchase()" style="color:#069" >Purchase</button>
+		          <button ng-if="finalPrice==null" class="btn" ng-click="registerCart()" style="color:#069" >Checkout</button>
+              <button ng-if="finalPrice!=null" class="btn" style="color:#069">Purchase</button>
             </div>
 		        <br /><br />
    	 	  </div>

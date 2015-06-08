@@ -11,6 +11,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.twoTapCartData = null;
 	$scope.products = new Array();
 	$scope.checkoutInfo = null;
+	$scope.finalPrice = null;
+	$scope.salesTax = null;
+	$scope.shippingPrice = null;
 
 	
 	$scope.init = function(){
@@ -68,32 +71,34 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	
 
 	$scope.registerCart = function(){
-		$scope.products.push('http://www.abercrombie.com/shop/us/mens-socks-underwear-and-socks/a-and-f-casual-socks-4436081_01'); // batteries
-//		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
-//		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
-		// $scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
+// 		$scope.products.push('http://www.abercrombie.com/shop/us/mens-socks-underwear-and-socks/a-and-f-casual-socks-4436081_01'); // batteries
+// //		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
+// //		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
+// 		// $scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
 		
 		
-		var json = JSON.stringify({'products':$scope.products});
-		console.log(json);
+// 		var json = JSON.stringify({'products':$scope.products});
+// 		console.log(json);
 		
-		//array called products in json, each item in array is the URL
-		// hard code products array. will be 1 item array
-		var url = 'http://57.get-gt.appspot.com/twotap/cart';
-//		var url = '/twotap/cart/';
-        $http.post(url, json).success(function(data, status, headers, config) {
-        	var results = data['results'];
-        	console.log(JSON.stringify(results));
-        	$scope.twoTapCartId = results.twoTapResponse.cart_id;
+// 		//array called products in json, each item in array is the URL
+// 		// hard code products array. will be 1 item array
+// 		var url = 'http://57.get-gt.appspot.com/twotap/cart';
+// //		var url = '/twotap/cart/';
+//         $http.post(url, json).success(function(data, status, headers, config) {
+//         	var results = data['results'];
+//         	console.log(JSON.stringify(results));
+//         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
+        	$scope.loading = true;
+        	var status = setInterval($scope.getStatus(), 5000);
         	
             // if (results.confirmation != 'success'){
             //     alert(results['message']);
             //     return;
             // }
             
-        }).error(function(data, status, headers, config){
-            console.log("error", data, status, headers, config);
-        });
+        // }).error(function(data, status, headers, config){
+        //     console.log("error", data, status, headers, config);
+        // });
 	}
 
 	$scope.getStatus = function(){
@@ -111,7 +116,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         		$scope.twoTapCartData = data;
         	
         	console.log(JSON.stringify(data));
-        	alert(message);
+        	// alert(message);
+        	$scope.estimateTaxAndShipping();
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
@@ -165,6 +171,11 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(data));
+        	$scope.finalPrice = results.twoTapResponse.estimates[key].prices.final_price;
+			$scope.salesTax = results.twoTapResponse.estimates[key].prices.sales_tax;
+			$scope.shippingPrice = results.twoTapResponse.estimates[key].prices.shipping_price;
+			clearInterval(status);
+        	$scope.loading = false;
         	
             if (results.confirmation != 'success'){
                  alert(results['message']);
@@ -176,13 +187,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         });
 	}
 	
-	
 	$scope.purchase = function(){
-		console.log('PURCHASE');
 		return;
 	}
-
-
 	
 	$scope.checkout = function(){
 		return;
