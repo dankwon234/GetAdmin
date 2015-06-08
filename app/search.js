@@ -50,7 +50,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	        });
 		}
 
-	$scope.addToCart = function(var item){
+	$scope.addToCart = function(item){
 		console.log(item);
 	}
 
