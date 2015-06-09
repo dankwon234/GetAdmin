@@ -94,6 +94,7 @@
 			  	<h3>My Cart</h3>
 			  	<li ng-repeat="item in cart['items'] track by $index">
 			  		<strong>{{ item['name'] }}</strong>&nbsp&nbsp&nbsp&nbsp{{ item['price'] }}&nbsp&nbsp&nbsp&nbspSeller:&nbsp{{ item['seller'] }}
+			  		<button class="btn" style="color:#069" ng-clck="delete(item)">Remove</button>
 			  	</li>
 		  	</ol>
 		  </div>
