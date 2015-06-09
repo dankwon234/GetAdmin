@@ -9,7 +9,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	// TWO TAP STUFF:
 	$scope.twoTapCartId = null;
 	$scope.twoTapCartData = null;
-	$scope.products = new Array();
+	// $scope.products = new Array();
 	$scope.checkoutInfo = null;
 	$scope.finalPrice = null;
 	$scope.salesTax = null;
@@ -17,35 +17,35 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 	
 	$scope.init = function(){
-		// console.log('Cart Controller: INIT');
+		console.log('Cart Controller: INIT');
 
-		// var url = 'http://57.get-gt.appspot.com/api/account';
-  //       $http.get(url).success(function(data, status, headers, config) {
-  //       	var results = data['results'];
-  //       	console.log(JSON.stringify(results));
+		var url = 'http://57.get-gt.appspot.com/api/account';
+        $http.get(url).success(function(data, status, headers, config) {
+        	var results = data['results'];
+        	console.log(JSON.stringify(results));
         	
-  //           if (results.confirmation != 'success'){
-  //               alert(results['message']);
-  //               return;
-  //           }
+            if (results.confirmation != 'success'){
+                alert(results['message']);
+                return;
+            }
             
-  //           $scope.profile = results['profile'];
-  //           $scope.token = results['token'];
+            $scope.profile = results['profile'];
+            $scope.token = results['token'];
 
-		// 	var requestInfo = parseLocation('admin');
-  //   		console.log(JSON.stringify(requestInfo));
+			var requestInfo = parseLocation('admin');
+    		console.log(JSON.stringify(requestInfo));
     	
-  //   		if (requestInfo.params.id==null){
-  //       		console.log('CartController: MISSING CART ID');
-  //      		 	return;
-  //   		}
+    		if (requestInfo.params.id==null){
+        		console.log('CartController: MISSING CART ID');
+       		 	return;
+    		}
     	
-		// 	fetchCart(requestInfo.params.id);
+			fetchCart(requestInfo.params.id);
 
-  //       }).error(function(data, status, headers, config){
-  //           console.log("error", data, status, headers, config);
-  //       });
-			fetchCart('161afaa7');		
+        }).error(function(data, status, headers, config){
+            console.log("error", data, status, headers, config);
+        });
+			// fetchCart('161afaa7');		
 
 	}
 	
@@ -71,43 +71,43 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	
 
 	$scope.registerCart = function(){
-// 		$scope.products.push('http://www.abercrombie.com/shop/us/mens-socks-underwear-and-socks/a-and-f-casual-socks-4436081_01'); // batteries
-// //		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
-// //		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
-// 		// $scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
+		// $scope.products.push('http://www.abercrombie.com/shop/us/mens-socks-underwear-and-socks/a-and-f-casual-socks-4436081_01'); // batteries
+//		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
+//		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
+		// $scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
 		
 		
-// 		var json = JSON.stringify({'products':$scope.products});
-// 		console.log(json);
+		var json = JSON.stringify({'products':$scope.cart['items']});
+		console.log(json);
 		
-// 		//array called products in json, each item in array is the URL
-// 		// hard code products array. will be 1 item array
-// 		var url = 'http://57.get-gt.appspot.com/twotap/cart';
-// //		var url = '/twotap/cart/';
-//         $http.post(url, json).success(function(data, status, headers, config) {
-//         	var results = data['results'];
-//         	console.log(JSON.stringify(results));
-//         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
+		//array called products in json, each item in array is the URL
+		// hard code products array. will be 1 item array
+		var url = 'http://57.get-gt.appspot.com/twotap/cart';
+//		var url = '/twotap/cart/';
+        $http.post(url, json).success(function(data, status, headers, config) {
+        	var results = data['results'];
+        	console.log(JSON.stringify(results));
+        	$scope.twoTapCartId = results.twoTapResponse.cart_id;
         	$scope.loading = true;
         	var status = setInterval($scope.getStatus(), 5000);
         	
-            // if (results.confirmation != 'success'){
-            //     alert(results['message']);
-            //     return;
-            // }
+            if (results.confirmation != 'success'){
+                alert(results['message']);
+                return;
+            }
             
-        // }).error(function(data, status, headers, config){
-        //     console.log("error", data, status, headers, config);
-        // });
+        }).error(function(data, status, headers, config){
+            console.log("error", data, status, headers, config);
+        });
 	}
 
 	$scope.getStatus = function(){
-		if ($scope.twoTapCartId==null){
-//			alert('First Register Your Cart by Clicking Step 1');
-//			return;
+// 		if ($scope.twoTapCartId==null){
+// //			alert('First Register Your Cart by Clicking Step 1');
+// //			return;
 			
-			$scope.twoTapCartId = '5572852c41d0cc994d23e237';
-		}
+// 			$scope.twoTapCartId = '5572852c41d0cc994d23e237';
+// 		}
 		
 		var url = '/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
