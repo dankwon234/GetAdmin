@@ -71,19 +71,19 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	
 
 	$scope.registerCart = function(){
-		// $scope.products.push('http://www.abercrombie.com/shop/us/mens-socks-underwear-and-socks/a-and-f-casual-socks-4436081_01'); // batteries
-//		$scope.products.push('http://www.barnesandnoble.com/w/in-the-unlikely-event-judy-blume/1120913060');
-//		$scope.products.push('http://www.acehardware.com/product/index.jsp?productId=11888727');
-		// $scope.products.push('http://www.bobwards.com/SRIXON-Q-Star-Golf-Ball-85622');
-		
-		
-		var json = JSON.stringify({'products':$scope.cart['items']});
+	
+		var urls = {};
+		var items = $scope.cart['items'];
+		var keys = Object.keys(items);
+		for (var i=0;i<items.length;i++){
+			var key = keys[i];
+			urls[i]=items[key]['url'];
+			console.log(JSON.stringify(urls));
+		}
+		var json = JSON.stringify({'products':JSON.stringify(urls)});
 		console.log(json);
 		
-		//array called products in json, each item in array is the URL
-		// hard code products array. will be 1 item array
 		var url = '/twotap/cart';
-//		var url = '/twotap/cart/';
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(results));
@@ -132,7 +132,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		
 		// prepare package with necessary info to send to backend for estimates:
 		$scope.checkoutInfo = {'cart_id':$scope.twoTapCartData.cart_id};
-		
+		clearInterval(status);
 		
 		var sites = $scope.twoTapCartData['sites'];
 		var keys = Object.keys(sites); // this gives back and array
@@ -174,7 +174,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         	$scope.finalPrice = results.twoTapResponse.estimates[key].prices.final_price;
 			$scope.salesTax = results.twoTapResponse.estimates[key].prices.sales_tax;
 			$scope.shippingPrice = results.twoTapResponse.estimates[key].prices.shipping_price;
-			clearInterval(status);
         	$scope.loading = false;
         	
             if (results.confirmation != 'success'){

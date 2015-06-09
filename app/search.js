@@ -51,7 +51,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		}
 
 	$scope.addToCart = function(item, site, result){
-		var addItem = {'id':item.id, 'name':result.name, 'brand':result.brand, 'price':item.price, 'seller':item.seller, 'sku':site.sku, 'url':site.url};
+		var addItem = {'id':item.id, 'name':result.name, 'brand':result.brand, 'image':result.images[0], 'price':item.price, 'seller':item.seller, 'sku':site.sku, 'url':site.url};
 		$scope.cart['items'].push(addItem);
 		console.log(JSON.stringify($scope.cart));
 
