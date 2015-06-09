@@ -112,12 +112,14 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		var url = '/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
         	var message = data['message'];
-        	if (message != 'still_processing')
+        	if (message != 'still_processing'){
+        		clearInterval(status);
         		$scope.twoTapCartData = data;
+        		$scope.estimateTaxAndShipping();
+        	}
         	
         	console.log(JSON.stringify(data));
         	// alert(message);
-        	$scope.estimateTaxAndShipping();
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
@@ -132,7 +134,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		
 		// prepare package with necessary info to send to backend for estimates:
 		$scope.checkoutInfo = {'cart_id':$scope.twoTapCartData.cart_id};
-		clearInterval(status);
 		
 		var sites = $scope.twoTapCartData['sites'];
 		var keys = Object.keys(sites); // this gives back and array
