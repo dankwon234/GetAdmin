@@ -73,6 +73,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.registerCart = function(){
 	
 		var urls = {};
+		var urlsString = "";
 		var items = $scope.cart['items'];
 		var keys = Object.keys(items);
 		for (var i=0;i<items.length;i++){
