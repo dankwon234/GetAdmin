@@ -94,8 +94,8 @@
    	 	  	<table>
    	 	  		<tbody>
    	 	  			<tr ng-repeat="item in cart['items'] track by $index">
-   	 	  				<td><strong>{{ item['name'] }}</strong></td>
-   	 	  				<td>{{ item['price'] }}</td>
+   	 	  				<td style="width:40%"><strong>{{ item['name'] }}</strong></td>
+   	 	  				<td>${{ item['price'] }}</td>
    	 	  				<td>Seller: {{ item['seller'] }}</td>
    	 	  				<td><button class="btn" style="color:#069" ng-click="delete(item)">Remove</button></td>
    	 	  			</tr>
