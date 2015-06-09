@@ -54,7 +54,8 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		console.log(JSON.stringify(item));
 		console.log(JSON.stringify(site));
 		var addItem = {'name':result.name, 'brand':result.brand, 'price':item.price, 'seller':item.seller, 'sku':site.sku, 'url':site.url};
-		$scope.cart['items'][item.id] = addItem;
+		console.log(JSON.stringify(addItem));
+		$scope.cart['items'].item.id = addItem;
 		console.log(JSON.stringify($scope.cart));
 
 		// var json = JSON.stringify($scope.cart);
