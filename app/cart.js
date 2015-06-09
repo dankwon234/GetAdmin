@@ -19,7 +19,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.init = function(){
 		console.log('Cart Controller: INIT');
 
-		var url = 'http://57.get-gt.appspot.com/api/account';
+		var url = '/api/account';
         $http.get(url).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(results));
@@ -82,7 +82,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		
 		//array called products in json, each item in array is the URL
 		// hard code products array. will be 1 item array
-		var url = 'http://57.get-gt.appspot.com/twotap/cart';
+		var url = '/twotap/cart';
 //		var url = '/twotap/cart/';
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
