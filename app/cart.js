@@ -86,7 +86,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         	console.log(JSON.stringify(results));
         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
         	$scope.loading = true;
-        	$scope.getStatus();
+        	setTimeout($scope.getStatus(), 5000);
         	
             if (results.confirmation != 'success'){
                 alert(results['message']);
@@ -118,7 +118,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         		$scope.estimateTaxAndShipping();
         	}
         	
-        	setTimeout($scope.getStatus(),5000);
+        	setTimeout($scope.getStatus(), 5000);
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
