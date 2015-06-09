@@ -72,16 +72,15 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 	$scope.registerCart = function(){
 	
-		var urls = {};
-		var urlsString = "";
 		var items = $scope.cart['items'];
-		var keys = Object.keys(items);
-		for (var i=0;i<items.length;i++){
-			var key = keys[i];
-			urls[i]=items[key]['url'];
+		var urls = [];
+		for (var i=0; i<items.length; i++){
+			var item = items[i];
+			urls.push(item.url);
 			console.log(JSON.stringify(urls));
 		}
-		var json = JSON.stringify({'products':JSON.stringify(urls)});
+
+		var json = JSON.stringify({'products':urls});
 		console.log(json);
 		
 		var url = '/twotap/cart';
