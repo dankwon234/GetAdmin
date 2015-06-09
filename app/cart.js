@@ -18,9 +18,8 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 	
 	$scope.init = function(){
-		
 		console.log('Cart Controller: INIT');
-
+		
 		var url = '/api/account';
         $http.get(url).success(function(data, status, headers, config) {
         	var results = data['results'];
@@ -47,15 +46,13 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
         });
-			// fetchCart('161afaa7');		
-
 	}
+
 	
 	function fetchCart(cartId){
 		var url = '/api/carts/'+cartId;
-        //var headers = {headers: {'Authorization': $scope.token}};
-        // $http.get(url, headers).success(function(data, status, headers, config) {
-        $http.get(url).success(function(data, status, headers, config) {
+        var headers = {headers: {'Authorization': $scope.token}};
+         $http.get(url, headers).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(results));
         	
@@ -104,13 +101,9 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 	$scope.getStatus = function(){
 		console.log('GET STATUS: ');
-// 		if ($scope.twoTapCartId==null){
-// //			alert('First Register Your Cart by Clicking Step 1');
-// //			return;
-			
-// 			$scope.twoTapCartId = '5572852c41d0cc994d23e237';
-// 		}
-		
+ 		if ($scope.twoTapCartId==null)
+ 			return;
+ 		
 		var url = '/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
         	var message = data['message'];
@@ -120,6 +113,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         		alert("TwoTap Cart Registration Has Failures");
         		return;
         	}
+        	
         	if (message != 'still_processing'){
         		$scope.twoTapCartData = data;
         		$scope.estimateTaxAndShipping();
@@ -165,7 +159,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 			var requiredFields = {};
 			fields_input[key].addToCart = { productId:requiredFields };
 			fields_input[key].noauthCheckout = shipping;
-//			pkg['fields_input'] = fields_input;
 		}
 		
 		$scope.checkoutInfo['fields_input'] = fields_input;
@@ -237,7 +230,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
     			if (i==1) 
     			    requestInfo['identifier'] = hierarchy[i];
-    			
     		}
     	}
 
