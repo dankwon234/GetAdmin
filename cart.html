@@ -57,27 +57,24 @@
             </li>
           </ol>
             </div>
-            <table>
+            <h4>Total: ${{ cart.total }}</h4>
+            <table ng-repeat="key in keys track by $index">
               <tbody>
                 <tr>
-                  <td style="padding:5px">Total: </td>
-                  <td>&nbsp&nbsp&nbsp&nbsp</td>
-                  <td><span style="color:#069">${{ cart.total }}</span></td>
+                  <td>Key: </td>
+                  <td>{{ key }}</td>
                 </tr>
-                <tr ng-if="finalPrice!=null">
-                  <td style="padding:5px">+ Sales Tax: </td>
-                  <td>&nbsp&nbsp&nbsp&nbsp</td>
-                  <td><span style="color:#069">{{ salesTax }}</span></td>
+                <tr>
+                  <td>Sales Tax: </td>
+                  <td style="color:#069">{{ estimates[key]['prices']['sales_tax'] }}</td>
                 </tr>
-                <tr ng-if="finalPrice!=null">
-                  <td style="padding:5px">+ Shipping Price: </td>
-                  <td>&nbsp&nbsp&nbsp&nbsp</td>
-                  <td><span style="color:#069">{{ shippingPrice }}</span></td>
+                <tr>
+                  <td>+ Shipping: </td>
+                  <td style="color:#069">{{ estimates[key]['prices']['shipping_price'] }}</td>
                 </tr>
-                <tr ng-if="finalPrice!=null">
-                  <td style="padding:5px">= <strong>Final Price:</strong> </td>
-                  <td>&nbsp&nbsp&nbsp&nbsp</td>
-                  <td><strong><span style="color:#069">{{ finalPrice }}</span></strong></td>
+                <tr>
+                  <td><strong>= Final Price: </strong></td>
+                  <td style="color:#069"><strong>{{ estimates[key]['prices']['final_price'] }}</strong></td>
                 </tr>
               </tbody>
             </table>

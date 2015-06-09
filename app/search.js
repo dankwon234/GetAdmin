@@ -61,6 +61,7 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		$http.put(url, json, headers).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(results));
+        	alert("Added to Cart");
         	
             if (results.confirmation != 'success'){
                 alert(results['message']);

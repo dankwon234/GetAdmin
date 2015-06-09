@@ -11,6 +11,8 @@ app.controller('CartController', ['$scope', '$http', '$timeout', function($scope
 	$scope.twoTapCartData = null;
 	// $scope.products = new Array();
 	$scope.checkoutInfo = null;
+	$scope.estimates = null;
+	$scope.keys = null;
 	$scope.finalPrice = null;
 	$scope.salesTax = null;
 	$scope.shippingPrice = null;
@@ -144,7 +146,7 @@ app.controller('CartController', ['$scope', '$http', '$timeout', function($scope
 		$scope.checkoutInfo = {'cart_id':$scope.twoTapCartData.cart_id};
 		
 		var sites = $scope.twoTapCartData['sites'];
-		var keys = Object.keys(sites); // this gives back and array
+		$scope.keys = Object.keys(sites); // this gives back and array
 		// console.log(JSON.stringify(keys));
 
 		var shipping = {};
@@ -158,8 +160,8 @@ app.controller('CartController', ['$scope', '$http', '$timeout', function($scope
 		shipping['shipping_telephone'] = '16469440155';
 		
 		var fields_input = {};
-		for (var i=0; i<keys.length; i++){
-			var key = keys[i]; // each key is a 'site ID'
+		for (var i=0; i<$scope.keys.length; i++){
+			var key = $scope.keys[i]; // each key is a 'site ID'
 			fields_input[key] = {'addToCart':'','noauthCheckout':''};
 			var s = sites[key];
 			var addToCart = s['add_to_cart'];
@@ -179,6 +181,7 @@ app.controller('CartController', ['$scope', '$http', '$timeout', function($scope
         $http.post(url, json).success(function(data, status, headers, config) {
         	var results = data['results'];
         	console.log(JSON.stringify(data));
+        	$scope.estimates = results.twoTapResponse.estimates;
         	$scope.finalPrice = results.twoTapResponse.estimates[key].prices.final_price;
 			$scope.salesTax = results.twoTapResponse.estimates[key].prices.sales_tax;
 			$scope.shippingPrice = results.twoTapResponse.estimates[key].prices.shipping_price;
