@@ -48,7 +48,7 @@
    	 	    <br />
    	 	    
             <h2 style="color:#069">Search Results</h2>
-            <ol style="float:left">
+            <ol style="width:60%">
               <li ng-repeat="result in productResults track by $index">
 				<div style= "width:100%; padding:24px;">
 				  <div style="width:60%">
@@ -84,18 +84,19 @@
           </ol>
 		  <button ng-click="search('no')" style="color:#069" >Next 10</button>
 		  <br /><br />
-		  <ol style="float:right">
-		  	<h3>My Cart</h3>
-		  	<li ng-repeat="item in cart['items'] track by $index">
-		  		{{ item['name'] }}  {{ item['price'] }} Seller: {{ item['seller'] }}
-		  	</li>
-		  </ol>
    	 	  
    	 	  
    	 	  </div>
    	 	
+   	 		<ol style="float:right">
+			  	<h3>My Cart</h3>
+			  	<li ng-repeat="item in cart['items'] track by $index">
+			  		{{ item['name'] }}  {{ item['price'] }} Seller: {{ item['seller'] }}
+			  	</li>
+		  	</ol>
+
         </div>
-		
+
   	</body>
 	
 </html>
