@@ -1,6 +1,6 @@
 var app = angular.module('CartModule', []);
 
-app.controller('CartController', ['$scope', '$http', function($scope, $http){
+app.controller('CartController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout){
 	$scope.profile = null;
 	$scope.token = null;
 	$scope.loading = false;
@@ -14,11 +14,11 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	$scope.finalPrice = null;
 	$scope.salesTax = null;
 	$scope.shippingPrice = null;
+	
 
 	
 	$scope.init = function(){
-		console.log('Cart Controller: INIT');
-		
+    	
 		var url = '/api/account';
         $http.get(url).success(function(data, status, headers, config) {
         	var results = data['results'];
@@ -86,7 +86,12 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         	console.log(JSON.stringify(results));
         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
         	$scope.loading = true;
-        	$timeout($scope.getStatus(), 5000);
+//        	$timeout($scope.getStatus(), 5000);
+        	
+        	$timeout(function(){ // check status every 5 seconds
+        		$scope.getStatus();
+        	}, 5000);
+
         	
             if (results.confirmation != 'success'){
                 alert(results['message']);
@@ -116,9 +121,13 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         		$scope.twoTapCartData = data;
         		console.log(JSON.stringify(data));
         		$scope.estimateTaxAndShipping();
+        		return;
         	}
         	
-        	$timeout($scope.getStatus(), 5000);
+        	$timeout(function(){ // check status every 5 seconds
+        		$scope.getStatus();
+        	}, 5000);
+
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
