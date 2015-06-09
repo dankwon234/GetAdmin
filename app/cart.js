@@ -114,6 +114,12 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		var url = '/twotap/status?cart='+$scope.twoTapCartId;
 		$http.get(url).success(function(data, status, headers, config) {
         	var message = data['message'];
+        	if (message == 'has_failures'){
+        		$scope.loading=false;
+        		clearInterval(status);
+        		alert("TwoTap Cart Registration Has Failures");
+        		return;
+        	}
         	if (message != 'still_processing'){
         		$scope.twoTapCartData = data;
         		$scope.estimateTaxAndShipping();
