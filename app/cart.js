@@ -1,7 +1,6 @@
 var app = angular.module('CartModule', []);
 
 app.controller('CartController', ['$scope', '$http', function($scope, $http){
-	var status = null;
 	$scope.profile = null;
 	$scope.token = null;
 	$scope.loading = false;
@@ -87,7 +86,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         	console.log(JSON.stringify(results));
         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
         	$scope.loading = true;
-        	status = setInterval($scope.getStatus(), 5000);
+        	$scope.getStatus();
         	
             if (results.confirmation != 'success'){
                 alert(results['message']);
@@ -109,17 +108,17 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         	var message = data['message'];
         	if (message == 'has_failures'){
         		$scope.loading=false;
-        		clearInterval(status);
         		alert("TwoTap Cart Registration Has Failures");
         		return;
         	}
         	
         	if (message != 'still_processing'){
         		$scope.twoTapCartData = data;
+        		console.log(JSON.stringify(data));
         		$scope.estimateTaxAndShipping();
         	}
         	
-        	console.log(JSON.stringify(data));
+        	setTimeout($scope.getStatus(),5000);
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
@@ -169,7 +168,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 		var url = '/twotap/estimates';
         $http.post(url, json).success(function(data, status, headers, config) {
-        	clearInterval(status);
         	var results = data['results'];
         	console.log(JSON.stringify(data));
         	$scope.finalPrice = results.twoTapResponse.estimates[key].prices.final_price;
