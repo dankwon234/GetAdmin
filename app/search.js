@@ -57,6 +57,23 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 		$scope.cart.items[item.id] = addItem;
 		console.log(JSON.stringify($scope.cart));
 
+		var json = JSON.stringify($scope.cart);
+		var url = '/api/carts/'+$scope.cart['id'];
+		var headers = {headers: {'Authorization': $scope.token}};
+		$http.put(url, json, headers).success(function(data, status, headers, config) {
+        	var results = data['results'];
+        	console.log(JSON.stringify(results));
+        	
+            if (results.confirmation != 'success'){
+                alert(results['message']);
+                return;
+            }
+			
+        }).error(function(data, status, headers, config){
+            console.log("error", data, status, headers, config);
+        });
+
+
 	}
 
 	$scope.search = function(isInitial){
