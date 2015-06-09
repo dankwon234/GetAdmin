@@ -1,6 +1,7 @@
 var app = angular.module('CartModule', []);
 
 app.controller('CartController', ['$scope', '$http', function($scope, $http){
+	var status = null;
 	$scope.profile = null;
 	$scope.token = null;
 	$scope.loading = false;
@@ -17,6 +18,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 	
 	$scope.init = function(){
+		
 		console.log('Cart Controller: INIT');
 
 		var url = '/api/account';
@@ -71,7 +73,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	
 
 	$scope.registerCart = function(){
-	
 		var items = $scope.cart['items'];
 		var urls = [];
 		for (var i=0; i<items.length; i++){
@@ -89,7 +90,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         	console.log(JSON.stringify(results));
         	$scope.twoTapCartId = results.twoTapResponse.cart_id;
         	$scope.loading = true;
-        	var status = setInterval($scope.getStatus(), 5000);
+        	status = setInterval($scope.getStatus(), 5000);
         	
             if (results.confirmation != 'success'){
                 alert(results['message']);
@@ -102,6 +103,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 	}
 
 	$scope.getStatus = function(){
+		console.log('GET STATUS: ');
 // 		if ($scope.twoTapCartId==null){
 // //			alert('First Register Your Cart by Clicking Step 1');
 // //			return;
@@ -118,7 +120,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
         	}
         	
         	console.log(JSON.stringify(data));
-        	// alert(message);
 
         }).error(function(data, status, headers, config){
             console.log("error", data, status, headers, config);
