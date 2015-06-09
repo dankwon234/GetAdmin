@@ -93,7 +93,7 @@
    	 		<ol>
 			  	<h3>My Cart</h3>
 			  	<li ng-repeat="item in cart['items'] track by $index">
-			  		{{ item['name'] }}  {{ item['price'] }} Seller: {{ item['seller'] }}
+			  		<strong>{{ item['name'] }}</strong>&nbsp&nbsp&nbsp&nbsp{{ item['price'] }}&nbsp&nbsp&nbsp&nbspSeller:&nbsp{{ item['seller'] }}
 			  	</li>
 		  	</ol>
 		  </div>
