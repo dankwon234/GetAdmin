@@ -113,7 +113,6 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 		$http.get(url).success(function(data, status, headers, config) {
         	var message = data['message'];
         	if (message != 'still_processing'){
-        		clearInterval(status);
         		$scope.twoTapCartData = data;
         		$scope.estimateTaxAndShipping();
         	}
@@ -170,6 +169,7 @@ app.controller('CartController', ['$scope', '$http', function($scope, $http){
 
 		var url = '/twotap/estimates';
         $http.post(url, json).success(function(data, status, headers, config) {
+        	clearInterval(status);
         	var results = data['results'];
         	console.log(JSON.stringify(data));
         	$scope.finalPrice = results.twoTapResponse.estimates[key].prices.final_price;
