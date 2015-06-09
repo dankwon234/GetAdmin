@@ -50,9 +50,13 @@ app.controller('SearchController', ['$scope', '$http', function($scope, $http){
 	        });
 		}
 
-	$scope.addToCart = function(item, site){
+	$scope.addToCart = function(item, site, result){
 		console.log(JSON.stringify(item));
 		console.log(JSON.stringify(site));
+		var addItem = {'name':result.name, 'brand':result.brand, 'price':item.price, 'seller':item.seller, 'sku':site.sku, 'url':site.url};
+		cart[item.id] = addItem;
+		console.log(JSON.stringify(cart));
+
 	}
 
 	$scope.search = function(isInitial){
